@@ -1,4 +1,4 @@
-package been;
+package bean;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package been;
+package bean;
 
 public class Student {
 	private String no;

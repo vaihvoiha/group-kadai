@@ -1,17 +1,10 @@
-package been;
+package bean;
 
 import java.io.Serializable;
 
-public class Subject implements Serializable {
-	private String school_cd;
+public class School implements Serializable {
 	private String cd;
 	private String name;
-	public String getSchool_cd() {
-		return school_cd;
-	}
-	public void setSchool_cd(String school_cd) {
-		this.school_cd = school_cd;
-	}
 	public String getCd() {
 		return cd;
 	}
