@@ -8,8 +8,10 @@ import java.util.List;
 
 import bean.Student;
 
+
+//学生検索　クラス　入学年　在学中　学校コード
 public class StudentDAO extends DAO {
-	// 商品名で検索するメソッド
+
 //	セッションでログイン中のアカウント情報を取得
 	public List<Student> search(String key_class, int key_year, boolean key_attend, String school_cd) throws Exception {
 		// Studentを要素に持つList
@@ -65,7 +67,7 @@ public class StudentDAO extends DAO {
 
 
 
-	// すべての商品を参照するメソッド
+	// すべての学生を参照するメソッド
 	public List<Student> all() throws Exception {
 		// Productを要素に持つList
 		List<Student> list = new ArrayList<Student>();
@@ -101,7 +103,25 @@ public class StudentDAO extends DAO {
 		return list;
 	}
 
+    // 学生情報を登録するメソッド
+    public int insert(Student student) throws Exception {
+        Connection con = getConnection();
 
+        PreparedStatement st = con.prepareStatement("INSERT INTO student (NO, NAME, ENT_YEAR, CLASS_NUM, IS_ATTEND, SCHOOL_CD) VALUES (?, ?, ?, ?, ?, ?)");
+        st.setString(1, student.getNo());
+        st.setString(2, student.getName());
+        st.setInt(3, student.getEnt_year());
+        st.setString(4, student.getClass_num());
+        st.setBoolean(5, student.getIs_attend());
+        st.setString(6, student.getSchool_cd());
+
+        int line = st.executeUpdate();
+
+        st.close();
+        con.close();
+
+        return line;
+    }
 
 
 
