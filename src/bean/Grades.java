@@ -8,6 +8,7 @@ public class Grades implements Serializable {
 	private String no;
 	private String name;
 	private int point;
+
 	public int getEnt_year() {
 		return ent_year;
 	}
