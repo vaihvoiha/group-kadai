@@ -1,0 +1,130 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<!DOCTYPE html>
+
+<!-- ヘッダー -->
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .highlight {
+            background-color: #eaf6fd;
+            width: 870px;
+            padding: 10px 20px;
+            display: inline-block;
+            text-align: left;
+            height: 60px;
+            line-height: 60px;
+            margin: 0px auto 0px auto; /* 下部の余白を減らす */
+        }
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1><span class="highlight">得点管理システム</span></h1>
+</header>
+</body>
+
+<!-- サイドメニュー -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生管理システム</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* フォント設定 */
+        }
+
+        .oll {
+            padding: 0 190px; /* 左右のパディングを設定 */
+        }
+
+        .container {
+            display: flex; /* フレックスボックスの表示設定 */
+            align-items: flex-start; /* 上端に揃える */
+        }
+
+        .table {
+            border-left: 2px solid #eaeaea; /* 左側の境界線を設定 */
+            height: 500px; /* 高さを設定 */
+            padding: 20px; /* 内側の余白を設定 */
+            width: 100%; /* 幅を設定 */
+            box-sizing: border-box; /* ボックスのサイズを設定 */
+        }
+
+        .menu {
+            width: 15%; /* 幅を15%に設定 */
+            padding-right: 130px; /* 右側のパディングを設定 */
+            border-right: 2px solid #F0F1F2; /* 右側の境界線を設定 */
+        }
+
+        .menu ul {
+            list-style-type: none; /* リストマーカーを非表示 */
+            padding: 0; /* 内側の余白を0に設定 */
+        }
+
+        .menu ul li {
+            margin: 7px 0; /* 上下のマージンを7pxに設定 */
+        }
+
+        .menu ul li a {
+            text-decoration: underline; /* テキストの下線を設定 */
+            color: #007bff; /* テキストの色を設定 */
+        }
+
+        .menu ul li li a {
+            text-decoration: underline; /* テキストの下線を設定 */
+            color: #007bff; /* テキストの色を設定 */
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="oll">
+        <div class="container">
+            <div class="menu">
+                <ul>
+                    <li><a href="#">メニュー</a></li>
+                    <li><a href="#">学生管理</a></li>
+                    <label>成績管理</label>
+                    <li><a href="#"><span style="padding-left: 15px;">成績登録</span></a></li>
+                    <li><a href="#"><span style="padding-left: 15px;">成績参照</span></a></li>
+                    <li><a href="#">科目管理</a></li>
+                </ul>
+            </div>
+            <div class="table">
+                <!-- テーブルやその他のコンテンツをここに追加 -->
+            </div>
+        </div>
+    </div>
+</body>
+
+<!-- フッダー -->
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        footer {
+            text-align: center;
+            background-color: #dddddd;
+            padding: 10px;
+            width: 70%;
+            margin: auto;
+            box-sizing: border-box;
+        }
+        footer p {
+            margin: 0;
+            color: #333;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+<footer>
+    <p>© 2023 TIC</p>
+    <p>大原学園</p>
+</footer>
+</body>
+</html>

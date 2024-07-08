@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+.logout-container {
+    width: 600px;
+    padding: 0;
+    margin: 20px auto;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.logout-container h1 {
+    background-color: #f1f1f1;
+    padding: 10px;
+    margin: 0;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    font-size: 18px;
+}
+
+.logout-message {
+    background-color: #669980;
+    padding: 10px;
+    text-align: center;
+    color: #000000;
+    margin: 0;
+    border-top: 1px solid #ddd;
+}
+
+.login-link {
+    display: block;
+    width: 600px;
+    margin: 10px auto;
+    padding: 10px;
+    text-align: left;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
