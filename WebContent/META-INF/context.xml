@@ -1,10 +1,10 @@
 <Context reloadable="true">
 	<Resource
-		name="jdbc/ group-kadai"
+		name="jdbc/javasd"
 		auth="Container"
 		type="javax.sql.DataSource"
 		driverClassName="org.h2.Driver"
-		url=" jdbc:h2:tcp://localhost/~/javasd"
+		url="jdbc:h2:tcp://localhost/~/javasd"
 		username="sa"
 		password=""
 	/>

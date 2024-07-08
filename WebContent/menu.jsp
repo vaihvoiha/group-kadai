@@ -12,12 +12,15 @@
     box-sizing: border-box;
       width: 15%;
       padding-left: 1rem;
+
+
   }
 </style>
 <body>
 <div class="oll">
     <div class="container">
         <div class="menu">
+
             <ul>
                 <li><a href="#">メニュー</a></li>
                 <li><a href="#">学生管理</a></li>
@@ -27,6 +30,7 @@
                 <li><a href="#">科目管理</a></li>
             </ul>
         </div>
+
     </div>
 </div>
 </body>

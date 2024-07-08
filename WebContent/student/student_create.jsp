@@ -3,10 +3,17 @@
 
 	<!DOCTYPE html>
 	<html lang="ja">
+
+
+
+
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>学生情報登録</title>
+
+				<%@ include file="./../header.html" %>
+
 		<style>
 			body {
 				font-family: Arial, sans-serif;
@@ -75,11 +82,75 @@
 			.back-link:hover {
 			    text-decoration: underline;
 			}
+
+		    .container {
+            display: flex; /* フレックスボックスの表示設定 */
+            align-items: flex-start; /* 上端に揃える */
+
+
+        }
+               .container .menu {
+            width: 45%; /* 幅を15%に設定 */
+
+            /* 右側の境界線を設定 */
+        }
+        			.main-contents {
+			 width: 70%;
+			 padding: 10px;
+			 background-color: #ccc;
+			}
+			.side-menu {
+			 width: 20%;
+			 padding: 10px;
+			 background-color: #faa;
+		}
+
+
+        .container .menu .manu ul {
+            list-style-type: none; /* リストマーカーを非表示 */
+            padding: 0; /* 内側の余白を0に設定 */
+        }
+
+        .container .menu .manu ul li {
+            margin: 7px 0; /* 上下のマージンを7pxに設定 */
+        }
+
+        .container.menu .manu ul li a {
+            text-decoration: underline; /* テキストの下線を設定 */
+            color: #007bff; /* テキストの色を設定 */
+        }
+
+        .menu ul li li a {
+            text-decoration: underline; /* テキストの下線を設定 */
+            color: #007bff; /* テキストの色を設定 */
+            margin-left: 5px;
+        }
+
+
+			.main-contents {
+			 width: 70%;
+			 padding: 10px;
+			 background-color: #ccc;
+			}
+			.container .side-menu {
+			 width: 20%;
+			 padding: 10px;
+			 background-color: #faa;
+		}
+
+
+
 		</style>
 	</head>
 
 	<body>
+
+
 		<div class="container">
+		<div class="menu">
+		<%@ include file="./../base.html" %>
+		</div>
+		<div class="table">
 			<h2>学生情報登録</h2>
 			<form action="/student_create" method="post">
 				<div class="form-group">
@@ -135,5 +206,13 @@
 
 			</form>
 		</div>
+
+		</div>
+
+					<br><br>
+
 	</body>
+	<footer><%@ include file="./../footer.html" %></footer>
+
+
 	</html>
