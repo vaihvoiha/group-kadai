@@ -143,14 +143,19 @@
 	            <tbody>
 	                <c:forEach var="student" items="${students}">
 	                    <tr>
-	                        <td>${student.entYear}</td>
+	                        <td>${student.ent_year}</td>
 	                        <td>${student.no}</td>
 	                        <td>${student.name}</td>
-	                        <td>${student.classNum}</td>
+	                        <td>${student.class_num}</td>
+
+
 	                        <td><c:choose>
 	                            <c:when test="${student.active}">○</c:when>
 	                            <c:otherwise>×</c:otherwise>
 	                        </c:choose></td>
+
+
+
 	                        <td><a href="/StudentUpdate.edit?no=${student.no}">変更</a></td>
 
 	                    </tr>

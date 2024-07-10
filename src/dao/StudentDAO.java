@@ -13,7 +13,9 @@ import bean.Student;
 public class StudentDAO extends DAO {
 
 //	セッションでログイン中のアカウント情報を取得
-	public List<Student> search(String key_class, int key_year, boolean key_attend, String school_cd) throws Exception {
+//	public List<Student> search(String class_num, int ent_year, boolean active, String school_cd) throws Exception {
+
+	public List<Student> search(String class_num) throws Exception {
 		// Studentを要素に持つList
 		List<Student> list = new ArrayList<Student>();
 
@@ -25,18 +27,23 @@ public class StudentDAO extends DAO {
 		// 実行したいSQL文をプリペアードステートメントで準備
 		// "?" -> プレースホルダ
 		PreparedStatement st = con.prepareStatement(
-				"select * from product where ENT_YEAR= ?"
-				+ "and CLASS_NUM = ? "
-				+ "and IS_ATTEND = ?"
-				+ "and SCHOOL_CD = ?");
+				"select * from student where "
+				+ " CLASS_NUM = ? "
+		);
+
+//		PreparedStatement st = con.prepareStatement(
+//				"select * from product where ENT_YEAR= ?"
+//				+ "and CLASS_NUM = ? "
+//				+ "and IS_ATTEND = ?"
+//				+ "and SCHOOL_CD = ?");
 
 		// st.setStringメソッド...プリペアードステートメント
 		// のプレースホルダに値を埋め込む（バインド）する
 		// 第1引数＝プレースホルダ番号
-		st.setString(1,key_class );
-		st.setInt(2,key_year );
-		st.setBoolean(3,key_attend );
-		st.setString(4,school_cd );
+		st.setString(1,class_num );
+//		st.setInt(2,ent_year );
+//		st.setBoolean(2,active );
+//		st.setString(4,school_cd );
 
 
 		// SQL文を実行した結果をリザルトセットに格納
@@ -51,7 +58,7 @@ public class StudentDAO extends DAO {
 			p.setEnt_year(rs.getInt("ent_year"));
 			p.setNo(rs.getString("no"));
 			p.setName(rs.getString("name"));
-			p.setClass_num(rs.getString("class_num"));
+//			p.setClass_num(rs.getString("class_num"));
 			p.setIs_attend(rs.getBoolean("is_attend"));
 			// リストに追加
 			list.add(p);
