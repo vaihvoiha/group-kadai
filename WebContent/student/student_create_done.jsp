@@ -12,12 +12,13 @@
             margin: 50px;
             text-align: center;
         }
+
 <<<<<<< HEAD
-        
+
         .links{
         	display: flex;
         }
-        
+
         .links a {
             margin: 10px;
             display: inline-block;
@@ -26,7 +27,7 @@
             padding-right: 70px;
             text-align: left;
             display: block;
-            
+
         }
         h2 {
             background-color: #f2f2f2;

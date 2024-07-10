@@ -16,6 +16,7 @@
 				padding: 20px;
 			}
 
+
 			.container {
 				width: 70%;
 				margin: auto;
@@ -26,7 +27,7 @@
 				text-align: center;
 				color: #333;
 			}
-			
+
 			h2{
 				text-align: left; /* 左揃えに設定 */
 		    	background-color: #dddddd; /* 背景色を設定 */
@@ -80,8 +81,8 @@
 			.back-link:hover {
 			    text-decoration: underline;
 			}
-			
-			
+
+
 		</style>
 	</head>
 

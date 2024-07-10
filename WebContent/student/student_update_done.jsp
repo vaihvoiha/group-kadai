@@ -15,6 +15,7 @@
         .links a {
             margin: 10px;
 <<<<<<< HEAD
+
             padding: 100px;
             display: inline-block;
             color: #007BFF;
@@ -22,7 +23,7 @@
             display: block;
             padding: 150px 0px;
         }
-        h2 {  
+        h2 {
             background-color: #f2f2f2;
             text-align: left;
             padding: 5px 20px;

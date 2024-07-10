@@ -113,6 +113,7 @@
 			    font-weight: bold;
 			}
 
+
 			input[type="text"],
 			select {
 			    width: 100%;

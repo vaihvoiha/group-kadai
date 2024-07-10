@@ -16,6 +16,7 @@
             padding: 20px;
         }
 
+
         .oll {
             display: flex;
         }
@@ -95,7 +96,7 @@
             color: #007BFF;
             text-decoration: underline;
         }
-        
+
         .text-right{
 	        text-align: right;
         }
@@ -116,13 +117,13 @@
         tbody tr:nth-child(even) {
             background-color: #f9f9f9;
         }
-        
+
         h1{
         	text-align: left; /* 左揃えに設定 */
 		    background-color: #dddddd; /* 背景色を設定 */
 		    padding: 0 30px
         }
-        
+
     </style>
 </head>
 <body>
