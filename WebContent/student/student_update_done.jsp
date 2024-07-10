@@ -14,10 +14,24 @@
         }
         .links a {
             margin: 10px;
+<<<<<<< HEAD
+            padding: 100px;
+            display: inline-block;
+            color: #007BFF;
+            text-align: left;
+            display: block;
+            padding: 150px 0px;
+        }
+        h2 {  
+            background-color: #f2f2f2;
+            text-align: left;
+            padding: 5px 20px;
+=======
             display: inline-block;
         }
         h2 {
             background-color: #f2f2f2;
+>>>>>>> branch 'master' of https://github.com/vaihvoiha/group-kadai.git
         }
         P {
             background-color: #8FBC8F;

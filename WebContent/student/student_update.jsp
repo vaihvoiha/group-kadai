@@ -5,6 +5,88 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
+		<title>学生情報変更</title>
+		<style>
+			body {
+			    font-family: Arial, sans-serif;
+			    background-color: #f9f9f9;
+			    margin: 0;
+			    padding: 20px;
+			}
+
+			.container {
+			    max-width: 600px;
+			    margin: 0 auto;
+
+			}
+
+			h2 {
+			    background-color: #f2f2f2;
+            	text-align: left;
+            	padding: 5px 20px;
+			}
+
+			label {
+			    display: block;
+			    margin-top: 10px;
+			    font-weight: bold;
+			}
+
+			input[type="text"],
+			select {
+			    width: 100%;
+			    padding: 10px;
+			    margin-top: 5px;
+			    margin-bottom: 10px;
+			    border: 1px solid #ccc;
+			    border-radius: 5px;
+			    box-sizing: border-box;
+			}
+
+			input[type="checkbox"] {
+			    margin-top: 10px;
+			}
+
+			button {
+				display: block;
+			    width: 10%;
+			    padding: 10px;
+			    background-color: #196dd5;
+			    color: white;
+			    border: none;
+			    border-radius: 5px;
+			    cursor: pointer;
+			    font-size: 13px;
+			}
+
+			button:hover {
+			    background-color: #888888;
+			}
+
+			.center {
+				margin: auto;
+				text-align: center;
+			}
+
+			a {
+			    display: block;
+			    margin-top: 10px;
+			    color: #007BFF;
+			    text-align: left;
+			    font-size: 13px;
+			}
+
+			a:hover {
+			    text-decoration: underline;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h2>学生情報変更</h2>
+=======
 		<title>学生情報登録</title>
 		<style>
 			body {
@@ -82,6 +164,7 @@
 	<body>
 		<div class="container">
 			<h2>学生情報登録</h2>
+>>>>>>> branch 'master' of https://github.com/vaihvoiha/group-kadai.git
 			<form action="/create" method="post">
 				<div>
 					<label for="ent_year">入学年度</label>
