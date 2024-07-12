@@ -7,13 +7,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.Class_List;
+import bean.Search_Count;
 import bean.Student;
+import bean.Year_List;
 import dao.StudentDAO;
 import tool.CommonServlet1;
 
 //アノテーションurlで/chapter25/product　リクエストされたら実行
-@WebServlet(urlPatterns={"/student/1"})
-public class Abcd extends CommonServlet1  {
+@WebServlet(urlPatterns={"/student/student_list"})
+public class Student_list extends CommonServlet1  {
 
 	@Override
 	protected void get(HttpServletRequest req, HttpServletResponse resp) throws Exception {
@@ -27,14 +30,26 @@ public class Abcd extends CommonServlet1  {
 
 //		int ent_year=Integer.parseInt(req.getParameter("ent_year"));
 
-//		Boolean active = Boolean.parseBoolean(req.getParameter("active"));
+		String ent_year=req.getParameter("ent_year");
+
+
+		Boolean active = Boolean.parseBoolean(req.getParameter("active"));
 
 //		String school_cd=req.getParameter("school_cd");
 
+
+
 		if (class_num==null ) {
-			class_num="1" ;
-//			ent_year=0000;
+			class_num="" ;
 		}
+
+		if (ent_year==null ) {
+			ent_year="" ;
+		}
+
+//		if (school_cd==null ) {
+//			school_cd="" ;
+//		}
 
 
 
@@ -44,23 +59,52 @@ public class Abcd extends CommonServlet1  {
 //
 		StudentDAO dao=new StudentDAO();
 
+
+
+		if (session.getAttribute("session_customer") == null) {
+//		セッションからログイン中ユーザーの学校コードを取り出す
+			System.out.print( session.getAttribute("session_user_school_cd"));
+
+		}
+
+		Object school_cd = session.getAttribute("session_user_school_cd");
+
+
+
+
+//
+		if (school_cd==null ) {
+		school_cd="" ;
+	}
+
+
+
 //		List型
 //		ProductDAO のseachメソッドを実行引数は keyword
-		List<Student> list=dao.search( class_num);
-//		List<Student> list=dao.all();
+		List<Student> list=dao.search( class_num, ent_year, active,school_cd);
 
-		System.out.println("list1");
-		System.out.println(list);
+		List<Year_List> y_list = dao.year_list(school_cd);
 
+		List<Class_List> c_list = dao.class_list(school_cd);
+
+		List<Search_Count> search_count=dao.count( class_num, ent_year, active,school_cd);
+
+
+
+		System.out.print(y_list);
 //	セッション属性に検索結果を格納する
 		session.setAttribute("students", list);
+		session.setAttribute("years", y_list);
+		session.setAttribute("classes", c_list);
+		session.setAttribute("counts", search_count);
+
+
+
 
 		req.getRequestDispatcher("student_list.jsp").forward(req, resp);
 
-		System.out.println("list2");
-		System.out.println(list);
 
-	}
+		}
 
 
 
