@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import bean.Subject;
 import dao.SubjectDAO;
 
-@WebServlet("/subject_create")
+@WebServlet("subject/subject_create")
 public class SubjectCreate extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/subject_create.jsp").forward(request, response);
+        request.getRequestDispatcher("subject/subject_create.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,10 +33,10 @@ public class SubjectCreate extends HttpServlet {
         boolean success = subjectDAO.insert(subject);
 
         if (success) {
-            response.sendRedirect("subject_create_done.jsp");
+            response.sendRedirect("subject/subject_create_done.jsp");
         } else {
             request.setAttribute("errorMessage", "登録に失敗しました。");
-            request.getRequestDispatcher("/subject_create.jsp").forward(request, response);
+            request.getRequestDispatcher("subject/subject_create.jsp").forward(request, response);
         }
     }
 }
