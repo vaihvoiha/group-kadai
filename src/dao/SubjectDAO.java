@@ -13,20 +13,20 @@ import util.DbUtil;
 public class SubjectDAO {
 
     // 科目をIDと学校コードで取得
-    public Subject get(String id, String school_cd) {
+    public Subject get(String cd, String schoolCd) {
         Subject subject = null;
         Connection connection = DbUtil.getConnection();
         try {
-            String sql = "SELECT * FROM subjects WHERE id = ? AND school_cd = ?";
+            String sql = "SELECT * FROM SUBJECT WHERE CD = ? AND SCHOOL_CD = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, id);
-            ps.setString(2, school_cd);
+            ps.setString(1, cd);
+            ps.setString(2, schoolCd);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 subject = new Subject();
-                subject.setCd(rs.getString("cd"));
-                subject.setName(rs.getString("name"));
-                subject.setSchool_cd(rs.getString("school_cd"));
+                subject.setCd(rs.getString("CD"));
+                subject.setName(rs.getString("NAME"));
+                subject.setSchoolCd(rs.getString("SCHOOL_CD"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -41,14 +41,14 @@ public class SubjectDAO {
         List<Subject> subjects = new ArrayList<>();
         Connection connection = DbUtil.getConnection();
         try {
-            String sql = "SELECT * FROM subjects";
+            String sql = "SELECT * FROM SUBJECT";
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Subject subject = new Subject();
-                subject.setCd(rs.getString("cd"));
-                subject.setName(rs.getString("name"));
-                subject.setSchool_cd(rs.getString("school_cd"));
+                subject.setCd(rs.getString("CD"));
+                subject.setName(rs.getString("NAME"));
+                subject.setSchoolCd(rs.getString("SCHOOL_CD"));
                 subjects.add(subject);
             }
         } catch (SQLException e) {
@@ -64,12 +64,15 @@ public class SubjectDAO {
         boolean result = false;
         Connection connection = DbUtil.getConnection();
         try {
-            String sql = "INSERT INTO subjects (cd, name, school_cd) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO SUBJECT (CD, NAME, SCHOOL_CD) VALUES (?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, subject.getCd());
             ps.setString(2, subject.getName());
-            ps.setString(3, subject.getSchool_cd());
-            result = ps.executeUpdate() > 0;
+            ps.setString(3, subject.getSchoolCd());
+            int rowsInserted = ps.executeUpdate();
+            if (rowsInserted > 0) {
+                result = true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -83,12 +86,15 @@ public class SubjectDAO {
         boolean result = false;
         Connection connection = DbUtil.getConnection();
         try {
-            String sql = "UPDATE subjects SET name = ?, school_cd = ? WHERE cd = ?";
+            String sql = "UPDATE SUBJECT SET NAME = ? WHERE CD = ? AND SCHOOL_CD = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, subject.getName());
-            ps.setString(2, subject.getSchool_cd());
-            ps.setString(3, subject.getCd());
-            result = ps.executeUpdate() > 0;
+            ps.setString(2, subject.getCd());
+            ps.setString(3, subject.getSchoolCd());
+            int rowsUpdated = ps.executeUpdate();
+            if (rowsUpdated > 0) {
+                result = true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -98,14 +104,18 @@ public class SubjectDAO {
     }
 
     // 科目を削除
-    public boolean delete(Subject subject) {
+    public boolean delete(String cd, String schoolCd) {
         boolean result = false;
         Connection connection = DbUtil.getConnection();
         try {
-            String sql = "DELETE FROM subjects WHERE cd = ?";
+            String sql = "DELETE FROM SUBJECT WHERE CD = ? AND SCHOOL_CD = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, subject.getCd());
-            result = ps.executeUpdate() > 0;
+            ps.setString(1, cd);
+            ps.setString(2, schoolCd);
+            int rowsDeleted = ps.executeUpdate();
+            if (rowsDeleted > 0) {
+                result = true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

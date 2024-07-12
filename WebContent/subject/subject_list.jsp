@@ -10,10 +10,10 @@
             border-collapse: collapse;
         }
         th, td {
-		    border-bottom: 1px solid #DDDDDD; /* 薄いグレーの線 */
-		    padding: 8px;
-		    text-align: left;
-		}
+            border-bottom: 1px solid #DDDDDD; /* 薄いグレーの線 */
+            padding: 8px;
+            text-align: left;
+        }
         h2 {
             background-color: #EEEEEE;
         }
@@ -45,27 +45,25 @@
             </tr>
         </thead>
         <tbody>
-            <!-- 科目情報（科目コード） -->
+            <!-- 科目情報を表示 -->
+            <%@ page import="java.util.List" %>
+            <%@ page import="bean.Subject" %>
+            <%@ page import="dao.SubjectDAO" %>
+
+            <%
+            SubjectDAO subjectDAO = new SubjectDAO();
+            List<Subject> subjects = subjectDAO.selectAll();
+            for (Subject subject : subjects) {
+            %>
             <tr>
-                <td></td>
-                <!-- 科目情報（科目名） -->
-                <td></td>
-                <!-- 科目情報変更リンク -->
+                <td><%= subject.getCd() %></td>
+                <td><%= subject.getName() %></td>
                 <td>
-                    <a href="subject_update.jsp?id=001" class="spaced-link">変更</a>
-                    <!-- 科目情報削除リンク -->
-                    <a href="subject_delete.jsp?id=001">削除</a>
+                    <a href="subject_update.jsp?id=<%= subject.getCd() %>" class="spaced-link">変更</a>
+                    <a href="subject_delete.jsp?id=<%= subject.getCd() %>">削除</a>
                 </td>
             </tr>
-            <!-- 追加の科目情報 -->
-            <tr>
-                <td></td>
-                <td></td>
-                <td>
-                    <a href="subject_update.jsp?id=002" class="spaced-link">変更</a>
-                    <a href="subject_delete.jsp?id=002">削除</a>
-                </td>
-            </tr>
+            <% } %>
         </tbody>
     </table>
 </body>
