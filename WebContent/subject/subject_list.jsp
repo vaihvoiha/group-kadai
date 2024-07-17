@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
 <head>
 <%@ include file="./../header.html" %>
     <meta charset="UTF-8">
@@ -10,12 +9,11 @@
         body {
             font-family: Arial, sans-serif;
         }
-        .contain
-        er {
+        .container {
             display: flex;
         }
         .menu {
-            border-right: 2px solid #eaeaea; /* 右側にボーダーを追加 */
+            border-right: 2px solid #eaeaea;
             padding: 20px;
             height: ; /* サイドメニューの高さ、フッターの位置調整 */
             margin-left: 150px;
@@ -31,7 +29,7 @@
             align-items: center;
             background-color: #f2f2f2;
             padding: 10px 20px;
-            border-bottom: 1px solid #eaeaea; /* 黒枠をなくす */
+            border-bottom: 1px solid #eaeaea;
         }
         .content-header h2 {
             margin: 0;
@@ -78,24 +76,24 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <%@ page import="java.util.List" %>
+                    <%@ page import="bean.Subject" %>
+                    <%@ page import="dao.SubjectDAO" %>
+
+                    <%
+                    SubjectDAO subjectDAO = new SubjectDAO();
+                    List<Subject> subjects = subjectDAO.selectAll();
+                    for (Subject subject : subjects) {
+                    %>
                     <tr>
-                        <td></td>
-                        <td></td>
+                        <td><%= subject.getCd() %></td>
+                        <td><%= subject.getName() %></td>
                         <td class="actions">
-                            <a href="subject_update.jsp?id=001">変更</a>
-                            <a href="subject_delete.jsp?id=001">削除</a>
+                            <a href="subject_update.jsp?id=<%= subject.getCd() %>">変更</a>
+                            <a href="subject_delete.jsp?id=<%= subject.getCd() %>">削除</a>
                         </td>
                     </tr>
-                    <!-- 他の科目情報も同様に記述 -->
-                    <tr>
-                <td></td>
-                <td></td>
-                <td>
-                    <a href="subject_update.jsp?id=002" class="spaced-link">変更</a>
-                    <a href="subject_delete.jsp?id=002">削除</a>
-                </td>
-
-            </tr>
+                    <% } %>
                 </tbody>
             </table>
         </div>
