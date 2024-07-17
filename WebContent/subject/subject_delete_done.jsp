@@ -3,31 +3,74 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>削除完了</title>
+    <title>得点管理システム</title>
     <style>
         body {
             font-family: Arial, sans-serif;
         }
-        .container {
-            margin: 50px;
+        h2 {
+            background-color: #f2f2f2;
+            text-align: left;
+            padding: 5px 20px;
+        }
+        h3 {
+            background-color: #8FBC8F;
             text-align: center;
+            padding: 10px;
+            margin: 0 0 15% 0;
+        }
+        .links {
+            display: flex;
+            margin-top: 20px;
         }
         .links a {
             margin: 10px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+        .content {
+            margin: 0 0 100px 0;
+            padding: 20px;
+            background-color: #fff;
+            width: 100%;
+            box-sizing: border-box;
+            border-left: 2px solid #eaeaea;
+        }
+        .highlight {
             display: inline-block;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            background-color: #eaf6fd;
+        }
+        .container {
+            display: flex;
+            align-items: flex-start;
+            width: 70%;
+            margin: auto;
         }
     </style>
 </head>
 <body>
+    <%@ include file="./../header.html" %>
     <div class="container">
-        <!-- 画面タイトル -->
-        <h2>削除完了</h2>
-        <!-- 完了メッセージ -->
-        <p>科目の削除が完了しました。</p>
-        <!-- 科目一覧リンク -->
-        <div class="links">
-            <a href="index.jsp">科目管理一覧画面に遷移する</a>
+        <%@ include file="./../base.html" %>
+        <div class="content">
+            <!-- 画面タイトル -->
+            <h2>科目情報削除</h2>
+            <!-- 完了メッセージ -->
+            <h3>削除が完了しました</h3>
+             <!-- 戻るリンク -->
+            <div class="links">
+                <a href="subject_list.jsp">科目一覧</a>
+                <a href="subject_list.jsp">戻る</a>
+            </div>
+
         </div>
     </div>
+    <%@ include file="./../footer.html" %>
 </body>
 </html>
