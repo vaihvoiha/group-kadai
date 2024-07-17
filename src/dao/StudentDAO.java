@@ -213,6 +213,7 @@ public class StudentDAO extends DAO {
 		PreparedStatement st = con.prepareStatement(
 				"SELECT DISTINCT ENT_YEAR    FROM STUDENT "
 				+ "WHERE SCHOOL_CD like ?"
+				+ "ORDER BY ENT_YEAR"
 				);
 
 

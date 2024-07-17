@@ -123,10 +123,6 @@
 		    padding: 0 30px
         }
 
-        .error_message {
-        color:#ffa500
-        }
-
     </style>
 </head>
 <body>
@@ -140,22 +136,14 @@
         <div class="form-group">
             <!-- 検索フォーム -->
             <div class="waku">
-
-
-
-	            <form action="/group_kadai/student/student_list" method="get" onsubmit="stu_form()" >
+	            <form action="/group_kadai/student/student_list" method="get">
 	                <!-- 入学年度の選択 -->
-
-
-	                <div id="opop"></div>
-
-
 	                <div class="form-group">
 	                    <label for="ent_year">入学年度</label>
 	                    <select id="ent_year" name="ent_year">
 	                        <option value="" >-------</option>
 	                        <!-- 動的に年を追加 -->
-	                        <c:forEach  var="year" items="${years}">
+	                        <c:forEach var="year" items="${years}">
 	                            <option value="${year.ent_year}">${year.ent_year}</option>
 	                        </c:forEach>
 	                    </select>
@@ -168,8 +156,8 @@
 	                    <select id="class_num" name="class_num">
 	                        <option value="">-------</option>
 	                        <!-- 動的にクラスを追加 -->
-	                        <c:forEach  var="classes" items="${classes}">
-	                            <option  value="${classes.class_num}">${classes.class_num}</option>
+	                        <c:forEach var="classes" items="${classes}">
+	                            <option value="${classes.class_num}">${classes.class_num}</option>
 	                        </c:forEach>
 	                    </select>
 	                </div>
@@ -184,52 +172,13 @@
 
 
 	            </form>
-
-	             <div class="error_message">${error_message }</div>
 	        </div>
 
             <!-- 検索結果の表示 -->
-            <c:forEach var="counts" items="${counts}">
-            <p>検索結果：${counts.search_count}件</p>
-            </c:forEach>
 
 
 
-
-
-
-            <!-- 学生情報のテーブル -->
-            <table>
-                <thead>
-                    <tr>
-                        <th>入学年度</th>
-                        <th>学生番号</th>
-                        <th>氏名</th>
-                        <th>クラス</th>
-                        <th>在学中</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="student" items="${students}">
-                        <tr>
-                            <td>${student.ent_year}</td>
-                            <td>${student.no}</td>
-                            <td>${student.name}</td>
-                            <td>${student.class_num}</td>
-                            <td>
-                                <c:choose>
-                                    <c:when test="${student.is_attend}">○</c:when>
-                                    <c:otherwise>×</c:otherwise>
-                                </c:choose>
-                            </td>
-                            <!-- 変更リンク -->
-                            <td><a href="/StudentUpdate.edit?no=${student.no}">変更</a></td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-
-
+<div>学生情報が存在しませんでした。</div>
 
 
 
@@ -238,6 +187,4 @@
         </div>
     </div>
 </div>
-
-<script src="./../form_error.js"></script>
 </body>

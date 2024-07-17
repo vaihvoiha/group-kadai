@@ -24,20 +24,29 @@ public class Student_list extends CommonServlet1  {
 //		セッションの準備
 		HttpSession session=req.getSession();
 
-//		jspに入力された値を取得（変数名：keyword）
+//		jspに入力された値を取得
 //		getメソッドで送られた入力値を取得する
+//		クラス
 		String class_num=req.getParameter("class_num");
 
-//		int ent_year=Integer.parseInt(req.getParameter("ent_year"));
 
+//		入学年度
 		String ent_year=req.getParameter("ent_year");
 
 
+//		在学中か
 		Boolean active = Boolean.parseBoolean(req.getParameter("active"));
 
-//		String school_cd=req.getParameter("school_cd");
 
 
+
+//		検索エラーメッセージ用
+		String error_message = "" ;
+
+
+
+
+		System.out.println(error_message);
 
 		if (class_num==null ) {
 			class_num="" ;
@@ -47,58 +56,77 @@ public class Student_list extends CommonServlet1  {
 			ent_year="" ;
 		}
 
-//		if (school_cd==null ) {
-//			school_cd="" ;
-//		}
 
 
+//		クラスには入力されて、入学年度には未入力
+		if (class_num != "" && ent_year.isEmpty() ){
+			error_message = "クラスを指定する場合は入学年度も指定してください";
+			class_num = "";
+			active = false;
 
 
-//		入力した値がnullだった場合 keyword を定義
-//		if (keyword==null) keyword="";
-//
+		}
 		StudentDAO dao=new StudentDAO();
 
 
 
-		if (session.getAttribute("session_customer") == null) {
 //		セッションからログイン中ユーザーの学校コードを取り出す
+		Object school_cd = session.getAttribute("session_user_school_cd");
+
+
+//		ログイン中ユーザーのセッションがnull（ログインしてない）
+		if (school_cd == null)
+		{
+
+
+//			まだやでーーーーーーーーーーーーーーーーーーーー
+//			ログイン画面へ
 			System.out.print( session.getAttribute("session_user_school_cd"));
 
 		}
 
-		Object school_cd = session.getAttribute("session_user_school_cd");
 
 
 
-
-//
+//	未ログイン用（学校コード入力）
 		if (school_cd==null ) {
 		school_cd="" ;
 	}
 
 
 
+
 //		List型
-//		ProductDAO のseachメソッドを実行引数は keyword
+//		StudentDAO のseachメソッド
+//		検索結果
 		List<Student> list=dao.search( class_num, ent_year, active,school_cd);
 
+//		入学年度選択一覧用
 		List<Year_List> y_list = dao.year_list(school_cd);
 
+//		クラス選択一覧用
 		List<Class_List> c_list = dao.class_list(school_cd);
 
+//		検索件数
 		List<Search_Count> search_count=dao.count( class_num, ent_year, active,school_cd);
 
 
 
-		System.out.print(y_list);
+
+//		listの中身がNULLかどうか
+//		NULLの場合は0件専用ページへ
+		if (list == null || list.size() == 0) {
+			req.getRequestDispatcher("student_list_null_table.jsp").forward(req, resp);
+
+		}
+
+
 //	セッション属性に検索結果を格納する
 		session.setAttribute("students", list);
 		session.setAttribute("years", y_list);
 		session.setAttribute("classes", c_list);
 		session.setAttribute("counts", search_count);
-
-
+		session.setAttribute("error_message", error_message);
 
 
 		req.getRequestDispatcher("student_list.jsp").forward(req, resp);
