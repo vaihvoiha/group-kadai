@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 // 抽象化クラス
 //　処理（中身）がない
 public abstract class Action {
-	public abstract String execute(
+	public abstract void execute(
 		HttpServletRequest request, HttpServletResponse response
 	) throws Exception;
 }

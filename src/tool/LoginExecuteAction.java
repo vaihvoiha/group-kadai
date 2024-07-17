@@ -3,15 +3,14 @@ package tool;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.Teacher;
 import dao.TeacherDAO;
 
-public class FrontController extends HttpServlet {
-    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+public class LoginExecuteAction extends Action {
+    public void execute(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
         String id = req.getParameter("id");
         String password = req.getParameter("password");
 
@@ -34,7 +33,7 @@ public class FrontController extends HttpServlet {
         if (teacher != null) {
             // 認証成功
             req.getSession().setAttribute("teacher", teacher);
-            res.sendRedirect("main.jsp");
+            res.sendRedirect("menu.jsp");
         } else {
             // 認証失敗
             res.sendRedirect("login.jsp?error=invalid");
