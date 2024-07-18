@@ -5,8 +5,8 @@ private int entYear;
 private String studentNo;
 private String studentName;
 private String classNum;
-private int Point1;
-private int Point2;
+private String Point1;
+private String Point2;
 public int getEntYear() {
 	return entYear;
 }
@@ -31,19 +31,17 @@ public String getClassNum() {
 public void setClassNum(String classNum) {
 	this.classNum = classNum;
 }
-public int getPoint1() {
+public String getPoint1() {
 	return Point1;
 }
-public void setPoint1(int point1) {
+public void setPoint1(String point1) {
 	Point1 = point1;
 }
-public int getPoint2() {
+public String getPoint2() {
 	return Point2;
 }
-public void setPoint2(int point2) {
+public void setPoint2(String point2) {
 	Point2 = point2;
 }
-
-
 
 }

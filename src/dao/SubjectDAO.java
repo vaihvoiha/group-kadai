@@ -8,9 +8,75 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.Subject;
+import bean.Subject_List;
 import util.DbUtil;
 
-public class SubjectDAO {
+public class SubjectDAO extends DAO {
+
+	// すべての科目（userの学校コードと一致する）を参照するメソッド
+	public List<Subject_List> subject_list(Object school_cd) throws Exception {
+		// Subject_Listを要素に持つList
+		List<Subject_List> list = new ArrayList<Subject_List>();
+
+		// データベースに接続
+		Connection con = getConnection();
+
+		// 実行したいSQL文をプリペアードステートメントで準備
+		PreparedStatement st = con.prepareStatement(
+				"SELECT  DISTINCT  NAME  AS subject_name "
+				+ "FROM SUBJECT  "
+				+ "WHERE SCHOOL_CD like ?"
+				);
+
+
+		// st.setStringメソッド...プリペアードステートメント
+		// のプレースホルダに値を埋め込む（バインド）する
+		st.setString(1,"%" + school_cd + "%" );
+
+
+		// SQL文を実行した結果をリザルトセットに格納
+		ResultSet rs = st.executeQuery();
+
+		// 結果から1件ずつ取り出すループ
+		while (rs.next()) {
+			// クラスをインスタンス化
+			Subject_List p = new Subject_List();
+			// 値をセット
+			p.setSubject_name(rs.getString("subject_name"));
+
+			// リストに追加
+			list.add(p);
+		}
+
+		// データベースとの接続を解除（必ず書く！！！！！！！！）
+		st.close();
+		con.close();
+
+
+
+
+		// 商品リストを返却
+		return list;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // 科目をIDと学校コードで取得
     public Subject get(String cd, String schoolCd) {

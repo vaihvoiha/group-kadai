@@ -38,6 +38,9 @@ public class Student_list extends CommonServlet1  {
 		Boolean active = Boolean.parseBoolean(req.getParameter("active"));
 
 
+//		セッションからログイン中ユーザーの学校コードを取り出す
+		Object school_cd = session.getAttribute("session_user_school_cd");
+
 
 
 //		検索エラーメッセージ用
@@ -58,6 +61,10 @@ public class Student_list extends CommonServlet1  {
 
 
 
+
+
+
+
 //		クラスには入力されて、入学年度には未入力
 		if (class_num != "" && ent_year.isEmpty() ){
 			error_message = "クラスを指定する場合は入学年度も指定してください";
@@ -65,13 +72,15 @@ public class Student_list extends CommonServlet1  {
 			active = false;
 
 
+
 		}
+
+
+
 		StudentDAO dao=new StudentDAO();
 
 
 
-//		セッションからログイン中ユーザーの学校コードを取り出す
-		Object school_cd = session.getAttribute("session_user_school_cd");
 
 
 //		ログイン中ユーザーのセッションがnull（ログインしてない）
@@ -90,14 +99,13 @@ public class Student_list extends CommonServlet1  {
 
 //	未ログイン用（学校コード入力）
 		if (school_cd==null ) {
-		school_cd="" ;
+		school_cd=100 ;
 	}
 
 
 
 
 //		List型
-//		StudentDAO のseachメソッド
 //		検索結果
 		List<Student> list=dao.search( class_num, ent_year, active,school_cd);
 
