@@ -11,9 +11,8 @@ import bean.TestListSubject;
 public class TestListSubjectDAO  extends DAO {
 
 //	成績参照一覧（科目別）
-		// 商品名で検索するメソッド
 //		セッションでログイン中のアカウント情報を取得
-	public List<TestListSubject> search_kamoku(int ent_year, String class_num, String sub_cd) throws Exception {
+	public List<TestListSubject> search_kamoku(String ent_year, String class_num, String sub_cd,Object school_cd) throws Exception {
 			// Studentを要素に持つList
 		List<TestListSubject> list = new ArrayList<TestListSubject>();
 
@@ -26,30 +25,43 @@ public class TestListSubjectDAO  extends DAO {
 			// "?" -> プレースホルダ
 		PreparedStatement st = con.prepareStatement(
 				"SELECT "
-				+ "S.NO AS 学生番号,"
-				+ "S.NAME AS 学生名,"
-				+ "S.ENT_YEAR AS 入学年度,"
-				+ "S.CLASS_NUM  AS クラス,"
-				+ "MAX(CASE WHEN T.NO = 1 THEN T.POINT END) AS 得点_回数1,"
-				+ "MAX(CASE WHEN T.NO = 2 THEN T.POINT END) AS 得点_回数2"
+				+ "S.NO AS studentNo,"
+				+ "S.NAME AS studentName,"
+				+ "S.ENT_YEAR AS entYear,"
+				+ "S.CLASS_NUM  AS classNum,"
+				+ "COALESCE("
+				+ "cast(MAX(CASE WHEN T.NO = 1 THEN T.POINT END) AS CHAR),'-') AS Point1,"
+				+ "COALESCE (cast(MAX(CASE WHEN T.NO = 2 THEN T.POINT END) AS char),'-') AS Point2 "
 				+ "FROM "
 				+ "STUDENT S"
-				+ "LEFT JOIN "
-				+ "TEST T ON S.NO = T.STUDENT_NO"
-				+ "WHERE"
-				+ "S.ENT_YEAR= ? "
-				+ "AND S.CLASS_NUM = ?"
-				+ "AND T.SUBJECT_CD = ?"
+				+ " LEFT JOIN "
+				+ "TEST T ON S.NO = T.STUDENT_NO "
+				+ "JOIN SUBJECT  SUB ON T.SUBJECT_CD = SUB.CD "
+				+ "WHERE "
+				+ "S.cast(ENT_YEAR as char) like ? "
+				+ "AND S.CLASS_NUM like ? "
+				+ "AND SUB.NAME like ? "
+				+ "AND S.SCHOOL_CD like ? "
 				+ "GROUP BY "
-				+ "S.NO, S.NAME, S.ENT_YEAR"
+				+ "S.NO, S.NAME, S.ENT_YEAR "
 				+ "ORDER BY "
 				+ "S.NO");
 
 
 
-		st.setInt(1,ent_year );
-		st.setString(2,class_num );
-		st.setString(3,sub_cd );
+		st.setString(1,"%" + ent_year + "%" );
+		st.setString(2,"%"+class_num+"%" );
+		st.setString(3,"%"+sub_cd + "%");
+		st.setString(4,"%"+school_cd +"%");
+
+
+
+		System.out.println(ent_year);
+		System.out.println(class_num);
+		System.out.println(sub_cd);
+		System.out.println(school_cd);
+
+
 
 
 		// SQL文を実行した結果をリザルトセットに格納
@@ -65,9 +77,9 @@ public class TestListSubjectDAO  extends DAO {
 			p.setClassNum(rs.getString("classNum"));
 			p.setStudentNo(rs.getString("studentNo"));
 			p.setStudentName(rs.getString("studentName"));
-			p.setPoint1(rs.getInt("point1"));
+			p.setPoint1(rs.getString("point1"));
 
-			p.setPoint2(rs.getInt("point2"));
+			p.setPoint2(rs.getString("point2"));
 			// リストに追加
 			list.add(p);
 		}
@@ -78,4 +90,60 @@ public class TestListSubjectDAO  extends DAO {
 		// 商品リストを返却
 		return list;
 	}
+
+
+
+
+
+
+
+
+	public List<Integer> getEnrollmentYears() throws Exception {
+        List<Integer> years = new ArrayList<>();
+
+        try (Connection con = getConnection();
+             PreparedStatement st = con.prepareStatement("SELECT DISTINCT ENT_YEAR FROM STUDENT ORDER BY ENT_YEAR")) {
+
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    years.add(rs.getInt("ENT_YEAR"));
+                }
+            }
+        }
+
+        return years;
+    }
+
+    public List<String> getClassNumbers() throws Exception {
+        List<String> classNumbers = new ArrayList<>();
+
+        try (Connection con = getConnection();
+             PreparedStatement st = con.prepareStatement("SELECT DISTINCT CLASS_NUM FROM STUDENT ORDER BY CLASS_NUM")) {
+
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    classNumbers.add(rs.getString("CLASS_NUM"));
+                }
+            }
+        }
+
+        return classNumbers;
+    }
+
+    public List<String> getSubjectCodes() throws Exception {
+        List<String> subjectCodes = new ArrayList<>();
+
+        try (Connection con = getConnection();
+             PreparedStatement st = con.prepareStatement("SELECT CD FROM SUBJECT ORDER BY CD")) {
+
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    subjectCodes.add(rs.getString("CD"));
+                }
+            }
+        }
+
+        return subjectCodes;
+    }
+
 }

@@ -5,13 +5,16 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import bean.Class_List;
 import bean.Search_Count;
 import bean.Student;
+import bean.Subject;
 import bean.Year_List;
+import util.DbUtil;
 
 
 public class StudentDAO extends DAO {
@@ -19,7 +22,7 @@ public class StudentDAO extends DAO {
 
 	//学生検索　クラス　入学年　在学中　学校コード
 	public List<Student> search(String class_num, String ent_year ,boolean active, Object school_cd) throws Exception {
-//, String school_cd
+
 
 
 
@@ -28,14 +31,7 @@ public class StudentDAO extends DAO {
 
 		// データベースに接続
 		Connection con = getConnection();
-		// データベースを使った処理を記述
 
-		// 実行したいSQL文をプリペアードステートメントで準備
-		// "?" -> プレースホルダ
-//		PreparedStatement st = con.prepareStatement(
-//				"select * from student where "
-//				+ "class_num like  ? "
-//		);
 
 		PreparedStatement st = con.prepareStatement(
 				"select * from student "
@@ -54,7 +50,7 @@ public class StudentDAO extends DAO {
 		st.setString(1,"%" + class_num + "%" );
 		st.setString(2,"%" + ent_year + "%" );
 		st.setBoolean(3 ,   active);
-		st.setString(4,"%" + school_cd + "%" );
+		st.setObject(4, school_cd  );
 
 
 		// SQL文を実行した結果をリザルトセットに格納
@@ -82,6 +78,7 @@ public class StudentDAO extends DAO {
 		// 商品リストを返却
 		return list;
 	}
+
 
 
 //	検索データ数を取得
@@ -114,7 +111,7 @@ public class StudentDAO extends DAO {
 		st.setString(1,"%" + class_num + "%" );
 		st.setString(2,"%" + ent_year + "%" );
 		st.setBoolean(3 ,   active);
-		st.setString(4,"%" + school_cd + "%" );
+		st.setObject(4, school_cd  );
 
 
 		// SQL文を実行した結果をリザルトセットに格納
@@ -262,7 +259,7 @@ public class StudentDAO extends DAO {
 
 		// st.setStringメソッド...プリペアードステートメント
 		// のプレースホルダに値を埋め込む（バインド）する
-		st.setString(1,"%" + school_cd + "%" );
+		st.setObject(1, school_cd  );
 
 
 		// SQL文を実行した結果をリザルトセットに格納
@@ -287,6 +284,140 @@ public class StudentDAO extends DAO {
 		return list;
 	}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // 科目を取得するメソッド
+    public Subject get(String cd, String school_cd) {
+        Subject subject = null;
+        Connection connection = DbUtil.getConnection();
+        try {
+            String sql = "SELECT * FROM subject WHERE cd = ? AND school_cd = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, cd);
+            ps.setString(2, school_cd);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                subject = new Subject();
+                subject.setCd(rs.getString("cd"));
+                subject.setName(rs.getString("name"));
+                subject.setSchoolCd(rs.getString("school_cd"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtil.closeConnection(connection);
+        }
+        return subject;
+    }
+
+    // すべての科目を取得するメソッド
+    public List<Subject> selectAll() {
+        List<Subject> subjects = new ArrayList<>();
+        Connection connection = DbUtil.getConnection();
+        try {
+            String sql = "SELECT * FROM subject";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Subject subject = new Subject();
+                subject.setCd(rs.getString("cd"));
+                subject.setName(rs.getString("name"));
+                subject.setSchoolCd(rs.getString("school_cd"));
+                subjects.add(subject);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtil.closeConnection(connection);
+        }
+        return subjects;
+    }
+
+    // 科目を追加するメソッド
+    public boolean insert2(String cd, String name, String school_cd) {
+        boolean result = false;
+        Connection connection = DbUtil.getConnection();
+        try {
+            String sql = "INSERT INTO subject (cd, name, school_cd) VALUES (?, ?, ?)";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, cd);
+            ps.setString(2, name);
+            ps.setString(3, school_cd);
+            result = ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtil.closeConnection(connection);
+        }
+        return result;
+    }
+
+    // 科目を追加するメソッド
+    public boolean insert(Subject subject) {
+        boolean result = false;
+        Connection connection = DbUtil.getConnection();
+        try {
+            String sql = "INSERT INTO subject (cd, name, school_cd) VALUES (?, ?, ?)";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, subject.getCd());
+            ps.setString(2, subject.getName());
+            ps.setString(3, subject.getSchoolCd());
+            result = ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtil.closeConnection(connection);
+        }
+        return result;
+    }
+
+    // 科目を更新するメソッド
+    public boolean update(Subject subject) {
+        boolean result = false;
+        Connection connection = DbUtil.getConnection();
+        try {
+            String sql = "UPDATE subject SET name = ? WHERE cd = ? AND school_cd = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, subject.getName());
+            ps.setString(2, subject.getCd());
+            ps.setString(3, subject.getSchoolCd());
+            result = ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtil.closeConnection(connection);
+        }
+        return result;
+    }
+
+    // 科目を削除するメソッド
+    public boolean delete(Subject subject) {
+        boolean result = false;
+        Connection connection = DbUtil.getConnection();
+        try {
+            String sql = "DELETE FROM subject WHERE cd = ? AND school_cd = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, subject.getCd());
+            ps.setString(2, subject.getSchoolCd());
+            result = ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtil.closeConnection(connection);
+        }
+        return result;
+    }
 
 
 }

@@ -156,7 +156,7 @@
             <tbody>
                 <% for (TestListStudent score : studentScores) { %>
                 <tr>
-                    <td><%= score.getSubjectName() %></td>
+                    <td><%= score.getStudentName() %></td>
                     <td><%= score.getSubjectCd() %></td>
                     <td><%= score.getTest_no() %></td>
                     <td><%= score.getTest_point() %></td>

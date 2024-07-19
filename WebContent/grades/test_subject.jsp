@@ -20,36 +20,10 @@
 
 
 
-移動済みだーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-
-このjspは使ってない０００００００００００００
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         <div class="oll">
     <div class="container">
-        <h1>成績参照</h1>
+        <h1>成績一覧（科目）</h1>
         <!-- 新規登録リンク -->
         <div class="text-right">
 
@@ -66,7 +40,7 @@
 
 
 
-	            <form action="/group_kadai/student/student_list" method="get" onsubmit="stu_form()" >
+	            <form action="/group_kadai/grades/grades_list" method="get" onsubmit="stu_form()" >
 	                <!-- 入学年度の選択 -->
 
 
@@ -101,8 +75,8 @@
 
 	                	                <!-- 科目の選択 -->
 	                <div class="form-group">
-	                    <label for="subject">科目aaaaa</label>
-	                    <select id="subject" name="subject">
+	                    <label for="sub_cd">科目</label>
+	                    <select id="sub_cd" name="sub_cd">
 	                        <option value="">-------</option>
 	                        <!-- 動的に科目を追加 -->
 	                        <c:forEach  var="subject" items="${subject}">
@@ -124,7 +98,7 @@
 	             <div class="error_message">${error_message }</div>
 
 
-	            <form action="/group_kadai/student/student_list" method="get" onsubmit="stu_form()" >
+	            <form action="/group_kadai/grades/grades_list" method="get" onsubmit="stu_form()" >
 	                <!-- 入学年度の選択 -->
 
 
@@ -139,7 +113,7 @@
 
 	                    <label for="ent_year">学生番号</label>
 
-            			<input type="text" name="f4" value="${sub_cd}" maxlength="10" placeholder="学生番号を入力してください">
+            			<input type="text" name="f4" value="${sub_cd}" maxlength="10" placeholder="学生番号を入力してください" required>
 
 	                <!-- 検索ボタン -->
 	                <button type="submit">検索</button>
@@ -156,19 +130,9 @@
 
 
 
-
-
-
-
-
-
-
-
-検索後（別ページ）
-
             <!-- 検索結果の表示 -->
-            <c:forEach var="counts" items="${counts}">
-            <p>科目：${counts.search_count}</p>
+            <c:forEach var="sub_select" items="${sub_select}">
+            <p>科目：${sub_select}</p>
             </c:forEach>
 
 
@@ -188,7 +152,19 @@
                         <th>2回</th>
                     </tr>
                 </thead>
+                <tbody>
+                    <c:forEach var="list_tls" items="${list_tls}">
+                        <tr>
+                            <td>${list_tls.entYear}</td>
+                            <td>${list_tls.classNum}</td>
+                            <td>${list_tls.studentNo}</td>
+                            <td>${list_tls.studentName}</td>
+                            <td>${list_tls.point1}</td>
+                            <td>${list_tls.point2}</td>
 
+                        </tr>
+                    </c:forEach>
+                </tbody>
             </table>
 
 
@@ -203,20 +179,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <p>科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</p>
 
 
 </body>

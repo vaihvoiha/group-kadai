@@ -12,6 +12,7 @@
     <h2>成績一覧（学生）</h2>
 
     <div>
+
         <h3>科目情報</h3>
         <form action="<%= request.getContextPath() %>/YourSubjectSearchServlet" method="post">
             <table>

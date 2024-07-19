@@ -1,21 +1,21 @@
 package bean;
 
 public class TestListStudent {
-	private String studentName;
-	private String studentNo;
-	private int test_no;
-	private int test_point;
-	public String getStudentName() {
-		return studentName;
+    private String subjectName;
+    private String subjectCd;
+    private int test_no;
+    private int test_point;
+	public String getSubjectName() {
+		return subjectName;
 	}
-	public void setStudentName(String studentName) {
-		this.studentName = studentName;
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
 	}
-	public String getStudentNo() {
-		return studentNo;
+	public String getSubjectCd() {
+		return subjectCd;
 	}
-	public void setStudentNo(String studentNo) {
-		this.studentNo = studentNo;
+	public void setSubjectCd(String subjectCd) {
+		this.subjectCd = subjectCd;
 	}
 	public int getTest_no() {
 		return test_no;

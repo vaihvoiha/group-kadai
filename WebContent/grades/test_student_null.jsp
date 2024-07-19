@@ -14,59 +14,26 @@
 <body>
 
 
+	<div class="oll">
+    	<div class="container">
+        	<h1>成績参照(学生)</h1>
+        	<!-- 新規登録リンク -->
+        	<div class="text-right">
 
 
 
+	        	<a href="student_create.jsp" class="register-link">新規登録</a>
 
 
 
-移動済みだーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-
-このjspは使ってない０００００００００００００
-
-
-
+        	</div>
+        	<div class="form-group">
+            	<!-- 検索フォーム -->
+            	<div class="waku">
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <div class="oll">
-    <div class="container">
-        <h1>成績参照</h1>
-        <!-- 新規登録リンク -->
-        <div class="text-right">
-
-
-
-	        <a href="student_create.jsp" class="register-link">新規登録</a>
-
-
-
-        </div>
-        <div class="form-group">
-            <!-- 検索フォーム -->
-            <div class="waku">
-
-
-
-	            <form action="/group_kadai/student/student_list" method="get" onsubmit="stu_form()" >
+	            <form action="/group_kadai/grades/grades_list" method="get" onsubmit="stu_form()" >
 	                <!-- 入学年度の選択 -->
 
 
@@ -74,7 +41,7 @@
 
 
 	                <div class="form-group">
-	                <p>科目情報</p>
+	                	<p>科目情報</p>
 	                    <label for="ent_year">入学年度</label>
 	                    <select id="ent_year" name="ent_year">
 	                        <option value="" >-------</option>
@@ -101,8 +68,8 @@
 
 	                	                <!-- 科目の選択 -->
 	                <div class="form-group">
-	                    <label for="subject">科目aaaaa</label>
-	                    <select id="subject" name="subject">
+	                    <label for="sub_cd">科目</label>
+	                    <select id="sub_cd" name="sub_cd">
 	                        <option value="">-------</option>
 	                        <!-- 動的に科目を追加 -->
 	                        <c:forEach  var="subject" items="${subject}">
@@ -119,12 +86,24 @@
 	                <button type="submit">検索</button>
 
 
+
+
 	            </form>
 				<!-- エラーメッセージ -->
 	             <div class="error_message">${error_message }</div>
 
 
-	            <form action="/group_kadai/student/student_list" method="get" onsubmit="stu_form()" >
+
+		</div>
+
+		</div>
+
+
+
+
+
+  	            <form action="/group_kadai/grades/grades_list" method="get" onsubmit="stu_form()" >
+
 	                <!-- 入学年度の選択 -->
 
 
@@ -137,9 +116,9 @@
 
 
 
-	                    <label for="ent_year">学生番号</label>
+	                    <label for="stu_no">学生番号</label>
 
-            			<input type="text" name="f4" value="${sub_cd}" maxlength="10" placeholder="学生番号を入力してください">
+            			<input type="text" name="stu_no" value="${sub_cd}" maxlength="10" placeholder="学生番号を入力してください" required>
 
 	                <!-- 検索ボタン -->
 	                <button type="submit">検索</button>
@@ -150,56 +129,13 @@
 
 	             </form>
 
-	        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-検索後（別ページ）
-
-            <!-- 検索結果の表示 -->
-            <c:forEach var="counts" items="${counts}">
-            <p>科目：${counts.search_count}</p>
-            </c:forEach>
-
-
-
-
-
-
-            <!-- 学生情報のテーブル -->
-            <table>
-                <thead>
-                    <tr>
-                        <th>入学年度</th>
-                        <th>クラス</th>
-                        <th>学生番号</th>
-                        <th>氏名</th>
-                        <th>1回</th>
-                        <th>2回</th>
-                    </tr>
-                </thead>
-
-            </table>
-
-
-
-
-
-
-
-        </div>
+	    </div>
     </div>
-</div>
+
+
+
+
+			<p>成績情報が存在しませんでした</p>
 
 
 
@@ -215,8 +151,6 @@
 
 
 
-
-    <p>科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</p>
 
 
 </body>
