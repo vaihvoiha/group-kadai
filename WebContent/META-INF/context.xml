@@ -1,11 +1,14 @@
 <Context reloadable="true">
-	<Resource
-		name="jdbc/javasd"
-		auth="Container"
-		type="javax.sql.DataSource"
-		driverClassName="org.h2.Driver"
-		url="jdbc:h2:tcp://localhost/~/javasd"
-		username="sa"
-		password=""
-	/>
+    <Resource
+        name="jdbc/javasd"
+        auth="Container"
+        type="javax.sql.DataSource"
+        driverClassName="org.h2.Driver"
+        url="jdbc:h2:tcp://localhost/~/javasd"
+        username="sa"
+        password=""
+        maxTotal="20"
+        maxIdle="10"
+        maxWaitMillis="-1"
+    />
 </Context>

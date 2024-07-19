@@ -12,7 +12,7 @@
         <h1>ログイン</h1>
         <form action="login" method="post">
             <label for="login">ID</label>
-            <input type="text" id="login" name="login" value="${login}">
+            <input type="text" id="login" name="login" value="<%= request.getParameter("login") != null ? request.getParameter("login") : "" %>">
 
             <label for="password">パスワード</label>
             <input type="password" id="password" name="password">
@@ -21,7 +21,7 @@
 
             <input type="submit" value="ログイン">
 
-            <p>${errorMessage}</p>
+            <p><%= request.getAttribute("errorMessage") != null ? request.getAttribute("errorMessage") : "" %></p>
         </form>
     </div>
     <script>
