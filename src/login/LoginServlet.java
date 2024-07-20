@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
 
             // 認証に成功した場合
             if (teacher != null) {
-                // ウェルカムページにリダイレクト
+                // mainページにリダイレクト
                 response.sendRedirect("./main.jsp");
             } else {
                 // 認証に失敗した場合
