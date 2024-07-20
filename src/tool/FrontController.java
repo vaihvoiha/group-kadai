@@ -1,43 +1,43 @@
 package tool;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.Teacher;
-import dao.TeacherDAO;
-
+// "*.action
+@WebServlet(urlPatterns={"*.action"})
 public class FrontController extends HttpServlet {
-    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-        String id = req.getParameter("id");
-        String password = req.getParameter("password");
 
-        // 入力バリデーション
-        if (id == null || id.isEmpty() || password == null || password.isEmpty()) {
-            res.sendRedirect("login.jsp?error=empty");
-            return;
-        }
+	public void doPost(
+		HttpServletRequest request, HttpServletResponse response
+	) throws ServletException, IOException {
+		PrintWriter out=response.getWriter();
+		try {
+//			Servletのあつ場所を取得
+			String path=request.getServletPath().substring(1);
 
-        TeacherDAO teacherDao = new TeacherDAO();
-        Teacher teacher = null;
-        try {
-            teacher = teacherDao.authenticate(id, password);
-        } catch (Exception e) {
-            e.printStackTrace();
-            res.sendRedirect("login.jsp?error=system");
-            return;
-        }
+//			実際に実行するアクションを呼ぶ準備
+			String name=path.replace(".a", "A").replace('/', '.');
+			Action action=(Action)Class.forName(name).
+				getDeclaredConstructor().newInstance();
 
-        if (teacher != null) {
-            // 認証成功
-            req.getSession().setAttribute("teacher", teacher);
-            res.sendRedirect("main.jsp");
-        } else {
-            // 認証失敗
-            res.sendRedirect("login.jsp?error=invalid");
-        }
-    }
+//			抽象クラスを呼び出し　<=　アクション（javaクラス）の実行
+			String url=action.execute(request, response);
+			request.getRequestDispatcher(url).
+				forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace(out);
+		}
+	}
+
+	public void doGet(
+		HttpServletRequest request, HttpServletResponse response
+	) throws ServletException, IOException {
+		doPost(request, response);
+	}
 }
