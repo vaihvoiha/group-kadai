@@ -16,6 +16,12 @@ import dao.TeacherloginDAO;
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    // doGetメソッドはHTTP GETリクエストを処理する
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // GETリクエストが来た場合、ログインページにリダイレクト
+        request.getRequestDispatcher("login/login.jsp").forward(request, response);
+    }
+
     // doPostメソッドはHTTP POSTリクエストを処理する
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // リクエストの文字エンコーディングをUTF-8に設定
@@ -33,7 +39,7 @@ public class LoginServlet extends HttpServlet {
 
             // 認証に成功した場合
             if (teacher != null) {
-                // mainページにリダイレクト
+                // にリダイレクト
                 response.sendRedirect("./main.jsp");
             } else {
                 // 認証に失敗した場合
