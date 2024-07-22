@@ -3,16 +3,16 @@ package bean;
 import java.io.Serializable;
 
 public class Subject implements Serializable {
-    private String schoolCd; // 学校コード
-    private String cd; // 科目コード
-    private String name; // 科目名
+    private String school_cd;
+    private String cd;
+    private String name;
 
-    public String getSchoolCd() {
-        return schoolCd;
+    public String getSchool_cd() {
+        return school_cd;
     }
 
-    public void setSchoolCd(String schoolCd) {
-        this.schoolCd = schoolCd;
+    public void setSchool_cd(String school_cd) {
+        this.school_cd = school_cd;
     }
 
     public String getCd() {

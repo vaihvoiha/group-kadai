@@ -221,7 +221,7 @@
 <a href="#">成績参照</a>
 </div>
 <div class="kamoku">
-<a href="#">科目管理</a>
+<a href="http://localhost:8080/group_kadai/subject/subject_list.jsp">科目管理</a>
 </div>
 </div>
 </div>

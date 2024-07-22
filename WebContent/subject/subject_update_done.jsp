@@ -55,19 +55,21 @@
     </style>
 </head>
 <body>
-    <%@ include file="./../header.html" %>
+	<%@ include file="./../header.html" %>
     <div class="container">
-        <%@ include file="./../base.html" %>
+    	<%@ include file="./../base.html" %>
         <div class="content">
-            <!-- 画面タイトル -->
-            <h2>科目情報変更</h2>
-            <!-- 完了メッセージ -->
-            <h3>変更が完了しました</h3>
-            <!-- 戻るリンク -->
-            <div class="links">
-                <a href="subject_list.jsp">科目一覧</a>
-            </div>
-        </div>
+        	<!-- 画面タイトル -->
+        	<h2>科目情報変更</h2>
+        	<!-- 完了メッセージ -->
+        	<h3>変更が完了しました</h3>
+        	<!-- 戻るリンク -->
+        	<div class="links">
+            	<a href="subject_create.jsp">戻る</a>
+            	<!-- 科目一覧リンク -->
+            	<a href="subject_list.jsp">科目一覧</a>
+        	</div>
+		</div>
     </div>
     <%@ include file="./../footer.html" %>
 </body>

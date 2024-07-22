@@ -57,20 +57,20 @@
 <body>
     <%@ include file="./../header.html" %>
     <div class="container">
-        <%@include file="./../base.html" %>
+        <%@ include file="./../base.html" %>
         <div class="content">
-            <!-- 画面タイトル -->
-            <h2>科目情報登録</h2>
-            <!-- 完了メッセージ -->
-            <h3>登録が完了しました</h3>
-            <!-- 科目一覧リンク -->
-            <div class="links">
-                <a href="subject_list.jsp">戻る</a>
-                <a href="subject_list.jsp">科目一覧</a>
-
-            </div>
+	        <!-- 画面タイトル -->
+	        <h2>科目情報登録</h2>
+	        <!-- 完了メッセージ -->
+	        <p>登録が完了しました</p>
+	        <!-- 戻るリンク -->
+	        <div class="links">
+	            <a href="subject_create.jsp">戻る</a>
+	            <!-- 科目一覧リンク -->
+	            <a href="subject_list.jsp">科目一覧</a>
+        	</div>
         </div>
     </div>
-    <%@include file="./../footer.html" %>
+    <%@ include file="./../footer.html" %>
 </body>
 </html>
