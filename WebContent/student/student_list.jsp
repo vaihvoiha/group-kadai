@@ -1,47 +1,42 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>学生管理</title>
-    <style>
+	<%@ include file="./../header.html" %>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>学生管理</title>
+	<style>
         /* 基本のスタイル設定 */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
             margin: 0;
             padding: 20px;
         }
-
 
         .oll {
             display: flex;
         }
 
-		.waku{
-			border: 1px solid #ccc;
-		    border-radius: 10px;
-		    padding: 10px;
-		    margin-bottom: 20px;
-		}
+        .waku {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
 
         /* コンテナのスタイル設定 */
         .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 70%;
+            margin: auto;
         }
 
         /* 見出しのスタイル設定 */
-        h1 {
+        .content h1 {
             text-align: center;
             color: #333;
+            margin-bottom: 20px; /* 余白を追加 */
         }
 
         /* フォームのスタイル設定 */
@@ -49,6 +44,7 @@
             display: flex;
             align-items: center;
             margin-bottom: 20px;
+
         }
 
         .form-group {
@@ -70,7 +66,7 @@
 
         /* プルダウンリストの横幅を長くする */
         select {
-            width: 300px; /* 必要に応じて横幅を調整 */
+            width: 150px; /* 必要に応じて横幅を調整 */
         }
 
         /* ボタンのスタイル設定 */
@@ -96,18 +92,11 @@
             text-decoration: underline;
         }
 
-        .text-right{
-	        text-align: right;
+        .text-right {
+            text-align: right;
         }
 
         /* テーブルのスタイル設定 */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-
-        }
-
         th, td {
             padding: 10px;
             text-align: left;
@@ -117,127 +106,124 @@
             background-color: #f9f9f9;
         }
 
-        h1{
-        	text-align: left; /* 左揃えに設定 */
-		    background-color: #dddddd; /* 背景色を設定 */
-		    padding: 0 30px
+        .content h1 {
+            background-color: #f2f2f2;
+            text-align: left;
+            padding: 5px 20px;
+        }
+
+        /* 追加: コンテンツ全体を小さくし、左にずらす */
+        .content {
+            font-size: 14px; /* 文字サイズを小さくする */
+            padding-left: 20px; /* 少し左にずらす */
+            border-left: 2px solid #eaeaea;
         }
 
         .error_message {
-        color:#ffa500
+            color: #ffa500;
         }
 
     </style>
 </head>
+
 <body>
 <div class="oll">
-    <div class="container">
-        <h1>学生管理</h1>
-        <!-- 新規登録リンク -->
-        <div class="text-right">
-	        <a href="student_create.jsp" class="register-link">新規登録</a>
-        </div>
-        <div class="form-group">
-            <!-- 検索フォーム -->
-            <div class="waku">
+	<%@ include file="./../base.html" %>
+	<div class="container">
+	<div class="content">
+		<h1>学生管理</h1>
+		<!-- 新規登録リンク -->
+		<div class="text-right">
+			<a href="student_create" class="register-link">新規登録</a>
+		</div>
+		<div class="form-group">
+			<!-- 検索フォーム -->
+			<div class="waku">
 
+				<form action="/group_kadai/student/student_list" method="get" onsubmit="stu_form()">
+					<!-- 入学年度の選択 -->
 
+					<div id="opop"></div>
 
-	            <form action="/group_kadai/student/student_list" method="get" onsubmit="stu_form()" >
-	                <!-- 入学年度の選択 -->
+					<div class="form-group">
+						<label for="ent_year">入学年度</label>
+						<select id="ent_year" name="ent_year">
+							<option value="">-------</option>
+							<!-- 動的に年を追加 -->
+							<c:forEach var="year" items="${years}">
+								<option value="${year.ent_year}">${year.ent_year}</option>
+							</c:forEach>
+						</select>
+					</div>
 
+                    <!-- クラスの選択 -->
+					<div class="form-group">
+						<label for="class_num">クラス</label>
+						<select id="class_num" name="class_num">
+							<option value="">-------</option>
+							<!-- 動的にクラスを追加 -->
+							<c:forEach var="classes" items="${classes}">
+								<option value="${classes.class_num}">${classes.class_num}</option>
+							</c:forEach>
+						</select>
+					</div>
 
-	                <div id="opop"></div>
+                    <!-- 在学中チェックボックス -->
+					<div class="form-group">
+						<input type="checkbox" id="active" name="active" value="True">在学中
+					</div>
 
+                    <!-- 絞り込みボタン -->
+					<button type="submit">絞込み</button>
+				</form>
 
-	                <div class="form-group">
-	                    <label for="ent_year">入学年度</label>
-	                    <select id="ent_year" name="ent_year">
-	                        <option value="" >-------</option>
-	                        <!-- 動的に年を追加 -->
-	                        <c:forEach  var="year" items="${years}">
-	                            <option value="${year.ent_year}">${year.ent_year}</option>
-	                        </c:forEach>
-	                    </select>
-
-	                </div>
-
-	                <!-- クラスの選択 -->
-	                <div class="form-group">
-	                    <label for="class_num">クラス</label>
-	                    <select id="class_num" name="class_num">
-	                        <option value="">-------</option>
-	                        <!-- 動的にクラスを追加 -->
-	                        <c:forEach  var="classes" items="${classes}">
-	                            <option  value="${classes.class_num}">${classes.class_num}</option>
-	                        </c:forEach>
-	                    </select>
-	                </div>
-
-	                <!-- 在学中チェックボックス -->
-	                <div class="form-group">
-	                    <input type="checkbox" id="active" name="active" value="True">在学中
-	                </div>
-
-	                <!-- 絞り込みボタン -->
-	                <button type="submit">絞込み</button>
-
-
-	            </form>
-
-	             <div class="error_message">${error_message }</div>
-	        </div>
+					<div class="error_message">${error_message}</div>
+			</div>
 
             <!-- 検索結果の表示 -->
-            <c:forEach var="counts" items="${counts}">
-            <p>検索結果：${counts.search_count}件</p>
-            </c:forEach>
-
-
-
+			<c:forEach var="counts" items="${counts}">
+				<p>検索結果：${counts.search_count}件</p>
+			</c:forEach>
 
 
 
             <!-- 学生情報のテーブル -->
-            <table>
-                <thead>
-                    <tr>
-                        <th>入学年度</th>
-                        <th>学生番号</th>
-                        <th>氏名</th>
-                        <th>クラス</th>
-                        <th>在学中</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="student" items="${students}">
-                        <tr>
-                            <td>${student.ent_year}</td>
-                            <td>${student.no}</td>
-                            <td>${student.name}</td>
-                            <td>${student.class_num}</td>
-                            <td>
-                                <c:choose>
-                                    <c:when test="${student.is_attend}">○</c:when>
-                                    <c:otherwise>×</c:otherwise>
-                                </c:choose>
-                            </td>
-                            <!-- 変更リンク -->
-                            <td><a href="/StudentUpdate.edit?no=${student.no}">変更</a></td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
+			<table>
+				<thead>
+					<tr>
+						<th>入学年度</th>
+						<th>学生番号</th>
+						<th>氏名</th>
+						<th>クラス</th>
+						<th>在学中</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="student" items="${students}">
+						<tr>
+							<td>${student.ent_year}</td>
+							<td>${student.no}</td>
+							<td>${student.name}</td>
+							<td>${student.class_num}</td>
+							<td>
+								<c:choose>
+									<c:when test="${student.is_attend}">○</c:when>
+									<c:otherwise>×</c:otherwise>
+								</c:choose>
+							</td>
+							<!-- 変更リンク -->
+							<td><a href="${pageContext.request.contextPath}/student/student_update?no=${student.no}">変更</a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 
-
-
-
-
-
-
-        </div>
-    </div>
+		</div>
+	</div>
+	</div>
 </div>
 
+<%@ include file="./../footer.html" %>
 <script src="./../form_error.js"></script>
 </body>
+</html>
