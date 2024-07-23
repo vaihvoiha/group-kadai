@@ -12,7 +12,7 @@ import java.util.List;
 import bean.Class_List;
 import bean.Search_Count;
 import bean.Student;
-import bean.Subject;
+import bean.Subject1;
 import bean.Year_List;
 import util.DbUtil;
 
@@ -298,8 +298,8 @@ public class StudentDAO extends DAO {
 
 
     // 科目を取得するメソッド
-    public Subject get(String cd, String school_cd) {
-        Subject subject = null;
+    public Subject1 get(String cd, String school_cd) {
+        Subject1 subject = null;
         Connection connection = DbUtil.getConnection();
         try {
             String sql = "SELECT * FROM subject WHERE cd = ? AND school_cd = ?";
@@ -308,7 +308,7 @@ public class StudentDAO extends DAO {
             ps.setString(2, school_cd);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                subject = new Subject();
+                subject = new Subject1();
                 subject.setCd(rs.getString("cd"));
                 subject.setName(rs.getString("name"));
                 subject.setSchoolCd(rs.getString("school_cd"));
@@ -322,15 +322,15 @@ public class StudentDAO extends DAO {
     }
 
     // すべての科目を取得するメソッド
-    public List<Subject> selectAll() {
-        List<Subject> subjects = new ArrayList<>();
+    public List<Subject1> selectAll() {
+        List<Subject1> subjects = new ArrayList<>();
         Connection connection = DbUtil.getConnection();
         try {
             String sql = "SELECT * FROM subject";
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Subject subject = new Subject();
+                Subject1 subject = new Subject1();
                 subject.setCd(rs.getString("cd"));
                 subject.setName(rs.getString("name"));
                 subject.setSchoolCd(rs.getString("school_cd"));
@@ -364,7 +364,7 @@ public class StudentDAO extends DAO {
     }
 
     // 科目を追加するメソッド
-    public boolean insert(Subject subject) {
+    public boolean insert(Subject1 subject) {
         boolean result = false;
         Connection connection = DbUtil.getConnection();
         try {
@@ -383,7 +383,7 @@ public class StudentDAO extends DAO {
     }
 
     // 科目を更新するメソッド
-    public boolean update(Subject subject) {
+    public boolean update(Subject1 subject) {
         boolean result = false;
         Connection connection = DbUtil.getConnection();
         try {
@@ -402,7 +402,7 @@ public class StudentDAO extends DAO {
     }
 
     // 科目を削除するメソッド
-    public boolean delete(Subject subject) {
+    public boolean delete(Subject1 subject) {
         boolean result = false;
         Connection connection = DbUtil.getConnection();
         try {

@@ -5,7 +5,7 @@ public class Student {
 	private String name;
 	private int ent_year;
 	private String class_num;
-	private Boolean is_attend;
+	private boolean is_attend;
 	private String school_cd;
 	public String getNo() {
 		return no;
@@ -31,7 +31,7 @@ public class Student {
 	public void setClass_num(String class_num) {
 		this.class_num = class_num;
 	}
-	public Boolean getIs_attend() {
+	public boolean getIs_attend() {
 		return is_attend;
 	}
 	public void setIs_attend(Boolean is_attend) {

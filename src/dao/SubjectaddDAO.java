@@ -4,12 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import bean.Student;
-import bean.Subject;
+import bean.Subject1;
 
 public class SubjectaddDAO extends DAO {
 
     // 科目情報を登録するメソッド
-    public int insert(Subject subject) throws Exception {
+    public int insert(Subject1 subject) throws Exception {
         Connection con = getConnection();
 
         PreparedStatement st = con.prepareStatement("INSERT INTO subject (SCHOOL_CD, CD, NAME) VALUES (?, ?, ?)");

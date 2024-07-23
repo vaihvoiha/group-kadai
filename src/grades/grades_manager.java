@@ -1,5 +1,7 @@
 package grades;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
@@ -32,7 +34,6 @@ public class grades_manager extends CommonServlet1  {
 		HttpSession session=req.getSession();
 
 
-
 //		jspでの入力 <<<<
 
 //		入学年度
@@ -51,10 +52,27 @@ public class grades_manager extends CommonServlet1  {
 
 //		jspでの入力 >>>>
 
+		// 実験<<<
+		String[] jikkennArray = req.getParameterValues("jikken[]");
+		// 配列をリストに変換
+
+		List <String> jikkennList = new ArrayList<String>();
+
+
+
+
+		if (jikkennArray != null) {
+		    jikkennList = Arrays.asList(jikkennArray);
+		}// リストをコンソールに出力
+		System.out.println("実験List: " + jikkennList);
+		// 実験>>>
+
+
+
 
 
 		System.out.println("学生番号入力");
-		System.out.println(stu_no);
+
 
 
 
@@ -151,6 +169,8 @@ public class grades_manager extends CommonServlet1  {
 
 //		List型へ変換 >>>>
 
+
+		System.out.println(list_tls);
 
 		System.out.println(list_tls.size());
 

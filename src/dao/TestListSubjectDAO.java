@@ -55,15 +55,6 @@ public class TestListSubjectDAO  extends DAO {
 		st.setString(4,"%"+school_cd +"%");
 
 
-
-		System.out.println(ent_year);
-		System.out.println(class_num);
-		System.out.println(sub_cd);
-		System.out.println(school_cd);
-
-
-
-
 		// SQL文を実行した結果をリザルトセットに格納
 		ResultSet rs = st.executeQuery();
 
